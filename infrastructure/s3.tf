@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "dbucket" {
 resource "aws_s3_bucket_acl" "dbucket_acl" {
   bucket = aws_s3_bucket.dbucket.id
 
-  acl = "public-read"
+  acl = "private"
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "dbucket_lifecycle_config" {
@@ -34,7 +34,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "dbucket_lifecycle_config" {
 resource "aws_s3_object" "libre_office_zip" {
   bucket = aws_s3_bucket.dbucket.id
 
-  key = "libre_office_zip"
+  key = "libre_office.tar.gz"
 
   acl = "private"
 
