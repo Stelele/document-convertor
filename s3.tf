@@ -42,3 +42,12 @@ resource "aws_s3_object" "libre_office_zip" {
 
   etag = filemd5(var.libre_office_location)
 }
+
+resource "aws_s3_object" "lambda_document_convertor_zip" {
+  bucket = aws_s3_bucket.dbucket.id
+
+  key    = "lambda_document_convertor.zip"
+  source = data.archive_file.lambda_document_convertor.output_path
+
+  etag = filemd5(data.archive_file.lambda_document_convertor.output_path)
+}
