@@ -11,3 +11,12 @@ resource "aws_lambda_function" "document_convertor" {
 
   role = aws_iam_role.lambda-document-convertor.arn
 }
+
+resource "aws_lambda_permission" "api_gw" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.document_convertor.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${aws_apigatewayv2_api.lambda_doc_conv.execution_arn}/*/*"
+}
