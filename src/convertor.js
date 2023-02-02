@@ -1,17 +1,15 @@
+const { validateRequest, sendResponse } = require('./helpers')
+
 module.exports.handler = async (event) => {
-  let responseMessage = 'Hello, World!';
+  console.log({ event })
+  const responseMessage = 'Hello World !!'
+  const responseCode = 200
 
-  if (event.queryStringParameters && event.queryStringParameters['Name']) {
-    responseMessage = 'Hello, ' + event.queryStringParameters['Name'] + '!';
+  const validRequest = validateRequest(event.body)
+
+  if (!validRequest.isValidRequest) {
+    return sendResponse(400, validRequest.errorMessage)
   }
 
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      message: responseMessage,
-    }),
-  }
+  return sendResponse(responseCode, responseMessage)
 }

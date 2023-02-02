@@ -3,4 +3,6 @@ data "archive_file" "lambda_document_convertor" {
 
   source_dir  = abspath("src")
   output_path = abspath("lambda_document_convertor.zip")
+
+  excludes = ["node_modules", "tests"]
 }

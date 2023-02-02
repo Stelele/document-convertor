@@ -34,3 +34,6 @@
 instdir
 *.pdf
 *.txt
+test.json
+
+**/node_modules
