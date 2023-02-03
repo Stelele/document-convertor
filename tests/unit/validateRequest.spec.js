@@ -1,4 +1,4 @@
-const { validateRequest } = require('../../helpers')
+const { validateRequest } = require('../../src/helpers')
 
 test('valid request passed', () => {
   const result = validateRequest(JSON.stringify({

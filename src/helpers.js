@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 module.exports.validateRequest = (body) => {
   let isValidRequest = false
   let errorMessage = ''
@@ -30,4 +32,26 @@ module.exports.sendResponse = (responseStatus, message) => {
       message
     })
   }
+}
+
+module.exports.saveTempFileLocally = (fileName, base64FileString) => {
+  if (fileName === '') {
+    return false
+  }
+
+  if (fileName.includes('/')) {
+    fileName = fileName.replaceAll('/', '-')
+  }
+
+  if (fileName.includes('\\')) {
+    fileName = fileName.replaceAll('\\', '-')
+  }
+
+  try {
+    fs.writeFileSync(`/tmp/${fileName}`, base64FileString, { encoding: 'base64' })
+  } catch (e) {
+    return false
+  }
+
+  return true
 }
